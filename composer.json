@@ -1,0 +1,32 @@
+{
+    "name": "yiicod/yii2-laravel5queue",
+    "type": "yii2-extension",
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "Alexey Orlov",
+            "email": "aaorlov88@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Virchenko Maksim",
+            "email": "muslim1992@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "illuminate/queue": "^5.4.0",
+        "illuminate/encryption": "^5.4.0",
+        "illuminate/database": "^5.4.0",
+        "paragonie/random_compat": "^1.2",
+        "yiisoft/yii2-mongodb": "2.*",
+        "symfony/process": "~2.3|~3.0",
+        "yiicod/yii2-cron": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "yiicod\\laravel5queue\\": "/"
+        }
+    }
+}
