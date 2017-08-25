@@ -1,5 +1,5 @@
 {
-    "name": "yiicod/yii2-laravel5queue",
+    "name": "yiicod/yii2-jobqueue",
     "type": "yii2-extension",
     "license": "New BSD License",
     "authors": [
