@@ -20,7 +20,6 @@
         "illuminate/encryption": "^5.4.0",
         "illuminate/database": "^5.4.0",
         "paragonie/random_compat": "^1.2",
-        "yiisoft/yii2-mongodb": "2.*",
         "symfony/process": "~2.3|~3.0",
         "yiicod/yii2-cron": "*"
     },

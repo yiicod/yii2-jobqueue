@@ -6,8 +6,8 @@ use Illuminate\Queue\Capsule\Manager;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
-use yiicod\jobqueue\connectors\MongoThreadConnector;
 use yiicod\jobqueue\connectors\MongoConnector;
+use yiicod\jobqueue\connectors\MongoThreadConnector;
 
 /**
  * Yii component for laravel 5 queues to work with mongodb
