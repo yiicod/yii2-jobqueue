@@ -28,14 +28,14 @@ class JobQueue extends Component implements BootstrapInterface
             'queue' => 'default',
             'expire' => 60,
         ],
-        'async' => [
+        'thread' => [
             'driver' => 'mongo-thread',
-            'table' => 'yii_jobs_async',
+            'table' => 'yii_jobs_thread',
             'queue' => 'default',
             'expire' => 60,
             'limit' => 15,
             'yiiAlias' => '@app/..',
-            'connectionName' => 'async',
+            'connectionName' => 'thread',
         ],
     ];
 

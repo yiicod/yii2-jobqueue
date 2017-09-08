@@ -2,6 +2,7 @@
 
 namespace yiicod\jobqueue\queues;
 
+use Illuminate\Queue\Jobs\Job;
 use Symfony\Component\Process\Process;
 use Yii;
 use yii\mongodb\Connection;
@@ -119,12 +120,12 @@ class MongoThreadQueue extends MongoQueue
      *
      * @param MongoJob $job
      */
-    public function startProcess($job)
+    public function startProcess(MongoJob $job)
     {
         if ($this->canRunJob($job)) {
             $this->markJobAsReserved($job);
 
-            $command = $this->getCommand((string)$job->getJobId());
+            $command = $this->getCommand($job);
             $cwd = $this->getYiiPath();
 
             $process = new Process($command, $cwd);
@@ -137,19 +138,19 @@ class MongoThreadQueue extends MongoQueue
     /**
      * Get the Artisan command as a string for the job id.
      *
-     * @param $id
+     * @param MongoJob $job
      *
      * @return string
      */
-    protected function getCommand($id)
+    protected function getCommand(MongoJob $job): string
     {
         $connection = $this->connectionName;
-        $cmd = '%s yii job-queue/process --id=%s --connection=%s';
+        $cmd = '%s yii job-queue/process --id=%s --connection=%s --queue=%s';
         $cmd = $this->getBackgroundCommand($cmd);
 
         $binary = $this->getPhpBinary();
 
-        return sprintf($cmd, $binary, $id, $connection);
+        return sprintf($cmd, $binary, (string)$job->getJobId(), $connection, $job->getQueue());
     }
 
     /**

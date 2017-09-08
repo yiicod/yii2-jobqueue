@@ -42,7 +42,7 @@ class MongoThreadConnector implements ConnectorInterface
             'yiiAlias' => '@app/..',
             'binary' => 'php',
             'binaryArgs' => [],
-            'connectionName' => 'async',
+            'connectionName' => 'thread',
         ], $config);
 
         return new MongoThreadQueue($this->connection, $config['table'], $config['queue'], $config['expire'], $config['limit'], $config['yiiAlias'], $config['binary'], $config['binaryArgs'], $config['connectionName']);

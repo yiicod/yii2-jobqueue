@@ -1,5 +1,5 @@
-Laravel5 Queue (Yii 2)
-======================
+Job Queue (Yii 2) based on Illuminate Queue
+===========================================
 
 Provides Illuminate queues implementation for Yii 2 (using mongodb as main storage).
 
@@ -46,12 +46,12 @@ Start sync worker:
 
 Run worker daemon with console command: 
 ```php
-$ php yiic job-queue/start
+$ php yii job-queue/start
 ```
 
 Stop worker daemon:
 ```php
-$ php yiic job-queue/stop
+$ php yii job-queue/stop
 ```
 
 Async worker:
@@ -59,7 +59,7 @@ Async worker:
 
 Add jobqueue component with connections parameters, specially with "MongoThreadQueue" driver and connection name ("default" in example)
 ```php
-'laravel5queue' => [
+'jobqueue' => [
     'class' => 'yiicod\jobqueue\JobQueue',
     'connections' => [
         'default' => [
@@ -74,10 +74,15 @@ Add jobqueue component with connections parameters, specially with "MongoThreadQ
     ]
 ]
 ```
+Note: Default drivers are 'mongo-thread' for async multiple jobs and 'mongo' for single sync jobs
 
 Now you can run thread queues like usual:
 ```php
-$ php yiic job-queue/start
+$ php yii job-queue/start
+```
+OR
+```php
+$ php yii job-queue/restart
 ```
 And worker will take jobs from mongo database and run them by thread with defined driver using "mongo-thread" command in background
 
