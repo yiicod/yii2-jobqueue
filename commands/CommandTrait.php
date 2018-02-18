@@ -8,6 +8,12 @@ use yiicod\jobqueue\failed\MongoFailedJobProvider;
 use yiicod\jobqueue\handlers\ExceptionHandler;
 use yiicod\jobqueue\Worker;
 
+/**
+ * Trait CommandTrait
+ *
+ * @author Orlov Alexey <aaorlov88@gmail.com>
+ * @package yiicod\jobqueue\commands
+ */
 trait CommandTrait
 {
     /**
