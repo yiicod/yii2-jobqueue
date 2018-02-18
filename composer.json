@@ -1,7 +1,8 @@
 {
     "name": "yiicod/yii2-jobqueue",
     "type": "yii2-extension",
-    "license": "New BSD License",
+    "description": "Yii Job Queue based on Illuminate Queue",
+    "license": "MIT",
     "authors": [
         {
             "name": "Alexey Orlov",
@@ -15,14 +16,23 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "illuminate/queue": "^5.4.0",
-        "illuminate/encryption": "^5.4.0",
-        "illuminate/database": "^5.4.0",
+        "yiisoft/yii2": "2.*",
+        "illuminate/queue": "^5.6.0",
+        "illuminate/encryption": "^5.6.0",
+        "illuminate/database": "^5.6.0",
         "paragonie/random_compat": "^1.2",
-        "symfony/process": "~2.3|~3.0",
-        "yiicod/yii2-cron": "*"
+        "symfony/process": "~3.0|~4.0",
+        "yiicod/yii2-cron": "1.*"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "~2.1"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "yiicod\\laravel5queue\\": "/"

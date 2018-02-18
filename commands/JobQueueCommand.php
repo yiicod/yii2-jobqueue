@@ -4,39 +4,40 @@ namespace yiicod\jobqueue\commands;
 
 use Illuminate\Queue\WorkerOptions;
 use Yii;
-use yii\console\Controller;
+use yiicod\cron\commands\DaemonController;
 use yiicod\jobqueue\failed\MongoFailedJobProvider;
 use yiicod\jobqueue\handlers\ExceptionHandler;
 use yiicod\jobqueue\Worker;
 
 /**
- * Class WorkerCommand
+ * Command to start worker
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
- * @package yiicod\jobqueue\commands
+ * @author Virchenko Maksim <muslim1992@gmail.com>
  */
-class WorkerCommand extends Controller
+class JobQueueCommand extends DaemonController
 {
-    use CommandTrait;
+    use WorkerTrait;
 
     /**
-     * @var string
+     * Get daemon name
+     *
+     * @return string
      */
-    public $defaultAction = 'work';
+    protected function daemonName(): string
+    {
+        return 'jobqueue-' . $this->queue . '-' . $this->connection;
+    }
 
     /**
-     * @throws \Exception
+     * Run queue worker
+     *
+     * @author Virchenko Maksim <muslim1992@gmail.com>
      */
-    public function actionWork()
+    protected function worker()
     {
         $queueManager = Yii::$app->jobqueue->getQueueManager();
 
         $worker = new Worker($queueManager, new MongoFailedJobProvider(Yii::$app->mongodb, 'yii_jobs_failed'), new ExceptionHandler());
         $worker->daemon($this->connection, $this->queue, new WorkerOptions($this->delay, $this->memory, $this->timeout, $this->sleep, $this->maxTries));
-    }
-
-    protected function output($text)
-    {
-        $this->stdout($text);
     }
 }

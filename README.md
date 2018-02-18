@@ -1,10 +1,10 @@
-Laravel5 Queue (Yii 2)
-======================
+Yii Job Queue based on Illuminate Queue
+=======================================
 
-Provides Illuminate queues implementation for Yii 2 (using mongodb as main storage).
+Provides Illuminate queues implementation for Yii 2 using mongodb as main storage.
 
-Config:
--------
+#### Base config:
+
 ```php
 'bootstrap' => [
     'jobqueue'
@@ -15,8 +15,26 @@ Config:
     ]
 ]
 ```
+#### Console config
+```php
+    'controllerMap' => [
+        'job-queue' => [
+            'class' => 'yiicod\jobqueue\commands\JobQueueCommand',
+        ]
+    ],
+```
+###### Start worker:
 
-And console command:
+Run worker daemon with console command: 
+```php
+$ php yii job-queue/start
+```
+
+Stop worker daemon:
+```php
+$ php yii job-queue/stop
+```
+##### OR use pm2(http://pm2.keymetrics.io/). This variant more preferable.
 ```php
     'controllerMap' => [
         'job-queue' => [
@@ -24,62 +42,67 @@ And console command:
         ]
     ],
 ```
+###### pm2 config:
+```json
+    {
+      "apps": [
+        {
+          "name": "job-queue",
+          "script": "yii",
+          "args": [
+            "job-queue/work"
+          ],
+          "exec_interpreter": "php",
+          "exec_mode": "fork_mode",
+          "max_memory_restart": "1G",
+          "watch": false,
+          "merge_logs": true,
+          "out_file": "runtime/logs/job_queue.log",
+          "error_file": "runtime/logs/job_queue.log"
+        }
+      ]
+    }
+```
+###### Run PM2 daemons
+```bash
+pm2 start daemons-app.json
+```
 
-also: component requires "mongodb" component to connect to mongo database
+Note: Don't forget configure mongodb
 
 
-Adding jobs to queue:
----------------------
+#### Adding jobs to queue:
 
 Create your own handler which implements yiicod\jobqueue\base\JobQueueInterface 
 OR extends yiicod\jobqueue\handlers\JobQueue 
 and run parent::fire($job, $data) to restart db connection before job process
 
 ```php
-JobQueue::push(<--YOUR JOB QUEUE CLASS NAME->>, $data);
+JobQueue::push(<--YOUR JOB QUEUE CLASS NAME->>, $data, $queue, $connection);
+// Optional: $queue, $connection
 ```
 
 Note: $data - additional data to your handler
 
-Start sync worker:
-------------------
-
-Run worker daemon with console command: 
-```php
-$ php yiic job-queue/start
-```
-
-Stop worker daemon:
-```php
-$ php yiic job-queue/stop
-```
-
-Async worker:
--------------
+#### Queue configuration:
 
 Add jobqueue component with connections parameters, specially with "MongoThreadQueue" driver and connection name ("default" in example)
 ```php
-'laravel5queue' => [
+'jobqueue' => [
     'class' => 'yiicod\jobqueue\JobQueue',
     'connections' => [
         'default' => [
             'driver' => 'mongo-thread',
             'table' => 'yii-jobs',
             'queue' => 'default',
-            'expire' => 60,
-            'limit' => 1,
             'connectionName' => 'default',
-            'yiiAlias' => '@app/..'
+            'expire' => 60,
+            'limit' => 1, // How many parallel process should run at the same time            
         ],
     ]
 ]
 ```
-
-Now you can run thread queues like usual:
-```php
-$ php yiic job-queue/start
-```
-And worker will take jobs from mongo database and run them by thread with defined driver using "mongo-thread" command in background
+Worker will take jobs from mongo database and run them by thread with defined driver using "mongo-thread" command in the background
 
 Available events:
 _________________

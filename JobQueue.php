@@ -6,12 +6,12 @@ use Illuminate\Queue\Capsule\Manager;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
-use yiicod\jobqueue\connectors\MongoConnector;
 use yiicod\jobqueue\connectors\MongoThreadConnector;
 
 /**
  * Yii component for laravel 5 queues to work with mongodb
  *
+ * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class JobQueue extends Component implements BootstrapInterface
@@ -22,20 +22,13 @@ class JobQueue extends Component implements BootstrapInterface
      * @var array
      */
     public $connections = [
-        'default' => [
-            'driver' => 'mongo',
-            'table' => 'yii_jobs',
-            'queue' => 'default',
-            'expire' => 60,
-        ],
-        'async' => [
+        'thread' => [
             'driver' => 'mongo-thread',
-            'table' => 'yii_jobs_async',
+            'table' => 'yii_jobs_thread',
             'queue' => 'default',
             'expire' => 60,
-            'limit' => 15,
-            'yiiAlias' => '@app/..',
-            'connectionName' => 'async',
+            'limit' => 15, // Or 1
+            'connectionName' => 'thread',
         ],
     ];
 
@@ -74,10 +67,6 @@ class JobQueue extends Component implements BootstrapInterface
     {
         $this->manager = new Manager();
 
-        //Drivers for jobs
-        $this->manager->addConnector('mongo', function () {
-            return new MongoConnector(Yii::$app->mongodb);
-        });
         $this->manager->addConnector('mongo-thread', function () {
             return new MongoThreadConnector(Yii::$app->mongodb);
         });

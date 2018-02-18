@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\Job as JobContract;
 use Illuminate\Queue\Jobs\Job;
 use stdClass;
 use yiicod\jobqueue\queues\MongoQueue;
+use yiicod\jobqueue\queues\MongoThreadQueue;
 
 /**
  * MongoJob for laravel queue
@@ -37,7 +38,7 @@ class MongoJob extends Job implements JobContract
      * @param  StdClass $job
      * @param  string $queue
      */
-    public function __construct(Container $container, MongoQueue $database, $job, $queue)
+    public function __construct(Container $container, MongoThreadQueue $database, $job, $queue)
     {
         $this->job = $job;
         $this->queue = $queue;

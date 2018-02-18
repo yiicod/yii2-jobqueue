@@ -9,6 +9,7 @@ use yiicod\jobqueue\queues\MongoThreadQueue;
 /**
  * Connector for laravel queue to mongodb
  *
+ * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class MongoThreadConnector implements ConnectorInterface
@@ -39,12 +40,9 @@ class MongoThreadConnector implements ConnectorInterface
     {
         $config = array_merge([
             'limit' => 15,
-            'yiiAlias' => '@app/..',
-            'binary' => 'php',
-            'binaryArgs' => [],
-            'connectionName' => 'async',
+            'connectionName' => 'thread',
         ], $config);
 
-        return new MongoThreadQueue($this->connection, $config['table'], $config['queue'], $config['expire'], $config['limit'], $config['yiiAlias'], $config['binary'], $config['binaryArgs'], $config['connectionName']);
+        return new MongoThreadQueue($this->connection, $config['table'], $config['queue'], $config['expire'], $config['limit']);
     }
 }
