@@ -1,6 +1,8 @@
 Yii Job Queue based on Illuminate Queue
 =======================================
 
+[![Latest Stable Version](https://poser.pugx.org/yiicod/yii2-jobqueue/v/stable)](https://packagist.org/packages/yiicod/yii2-jobqueue) [![Total Downloads](https://poser.pugx.org/yiicod/yii2-jobqueue/downloads)](https://packagist.org/packages/yiicod/yii2-jobqueue) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yiicod/yii2-jobqueue/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yiicod/yii2-jobqueue/?branch=master)[![Code Climate](https://codeclimate.com/github/yiicod/yii2-jobqueue/badges/gpa.svg)](https://codeclimate.com/github/yiicod/yii2-jobqueue)
+
 Provides Illuminate queues implementation for Yii 2 using mongodb as main storage.
 
 #### Base config:
