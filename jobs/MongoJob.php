@@ -34,7 +34,7 @@ class MongoJob extends Job implements JobContract
      * Create a new job instance.
      *
      * @param  Container $container
-     * @param  MongoQueue $database
+     * @param  MongoThreadQueue $database
      * @param  StdClass $job
      * @param  string $queue
      */

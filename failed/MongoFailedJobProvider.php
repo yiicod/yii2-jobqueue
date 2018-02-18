@@ -4,6 +4,7 @@ namespace yiicod\jobqueue\failed;
 
 use Carbon\Carbon;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
+use yiicod\jobqueue\queues\MongoThreadQueue;
 
 /**
  * Mongo provider for failed jobs
@@ -15,7 +16,7 @@ class MongoFailedJobProvider implements FailedJobProviderInterface
     /**
      * The database connection name.
      *
-     * @var string
+     * @var MongoThreadQueue
      */
     protected $database;
 

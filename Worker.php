@@ -3,7 +3,7 @@
 namespace yiicod\jobqueue;
 
 use Exception;
-use Illuminate\Contracts\Debug\ExceptionHandler;
+use yiicod\jobqueue\handlersExceptionHandler;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
 use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\MaxAttemptsExceededException;
@@ -181,12 +181,12 @@ class Worker
      *
      * @param string $connectionName
      * @param \Illuminate\Contracts\Queue\Job $job
-     * @param Options $options
+     * @param WorkerOptions $options
      * @param \Exception $e
      *
      * @throws \Exception
      */
-    protected function handleJobException($connectionName, $job, Options $options, $e)
+    protected function handleJobException($connectionName, $job, WorkerOptions $options, $e)
     {
         try {
             // First, we will go ahead and mark the job as failed if it will exceed the maximum
@@ -333,7 +333,7 @@ class Worker
      *
      * @param  string $connectionName
      * @param  \Illuminate\Contracts\Queue\Job $job
-     * @param  \Exception $e
+     * @param  \Throwable $e
      */
     protected function failJob($connectionName, $job, $e)
     {
