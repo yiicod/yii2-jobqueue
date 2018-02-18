@@ -17,9 +17,9 @@
     ],
     "require": {
         "yiisoft/yii2": "2.*",
-        "illuminate/queue": "^5.6.0",
-        "illuminate/encryption": "^5.6.0",
-        "illuminate/database": "^5.6.0",
+        "illuminate/queue": "^5.5.0|^5.6.0",
+        "illuminate/encryption": "^5.5.0|^5.6.0",
+        "illuminate/database": "^5.5.0|^5.6.0",
         "paragonie/random_compat": "^1.2",
         "symfony/process": "~3.0|~4.0",
         "yiicod/yii2-cron": "1.*"
