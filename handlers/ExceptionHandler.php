@@ -8,7 +8,6 @@ use Yii;
 /**
  * DaemonExceptionHandler
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class ExceptionHandler implements \Illuminate\Contracts\Debug\ExceptionHandler

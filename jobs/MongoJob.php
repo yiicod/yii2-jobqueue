@@ -6,7 +6,6 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\Job as JobContract;
 use Illuminate\Queue\Jobs\Job;
 use stdClass;
-use yiicod\jobqueue\queues\MongoQueue;
 use yiicod\jobqueue\queues\MongoThreadQueue;
 
 /**
@@ -19,7 +18,7 @@ class MongoJob extends Job implements JobContract
     /**
      * The database queue instance.
      *
-     * @var MongoQueue
+     * @var MongoThreadQueue
      */
     protected $database;
 

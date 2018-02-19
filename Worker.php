@@ -3,7 +3,7 @@
 namespace yiicod\jobqueue;
 
 use Exception;
-use yiicod\jobqueue\handlersExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
 use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\MaxAttemptsExceededException;
@@ -18,10 +18,12 @@ use yiicod\jobqueue\events\JobFailedEvent;
 use yiicod\jobqueue\events\JobProcessedEvent;
 use yiicod\jobqueue\events\JobProcessingEvent;
 use yiicod\jobqueue\events\WorkerStoppingEvent;
+use yiicod\jobqueue\queues\MongoThreadQueue;
 
 /**
  * Worker for laravel queues
  *
+ * @author Orlov Alexey <aaorlov88@gmail.com@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class Worker
@@ -108,7 +110,7 @@ class Worker
      */
     public function runNextJob($connectionName, $queue, WorkerOptions $options)
     {
-        /** @var MongoQueue|Queue $connection */
+        /** @var MongoThreadQueue|Queue $connection */
         $connection = $this->manager->connection($connectionName);
         $job = $this->getNextJob($connection, $queue);
 
@@ -333,7 +335,7 @@ class Worker
      *
      * @param  string $connectionName
      * @param  \Illuminate\Contracts\Queue\Job $job
-     * @param  \Throwable $e
+     * @param  \Exception $e
      */
     protected function failJob($connectionName, $job, $e)
     {

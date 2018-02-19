@@ -11,7 +11,7 @@ use yiicod\jobqueue\connectors\MongoThreadConnector;
 /**
  * Yii component for laravel 5 queues to work with mongodb
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
+ * @author Orlov Alexey <aaorlov88@gmail.com@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class JobQueue extends Component implements BootstrapInterface
@@ -59,8 +59,6 @@ class JobQueue extends Component implements BootstrapInterface
     /**
      * Connect queue manager for mongo database
      *
-     * @author Virchenko Maksim <muslim1992@gmail.com>
-     *
      * @return Manager
      */
     protected function connect()
@@ -92,8 +90,6 @@ class JobQueue extends Component implements BootstrapInterface
     /**
      * Push new job to queue
      *
-     * @author Virchenko Maksim <muslim1992@gmail.com>
-     *
      * @param mixed $job
      * @param array $data
      * @param string $queue
@@ -108,8 +104,6 @@ class JobQueue extends Component implements BootstrapInterface
 
     /**
      * Push new job to queue if this job is not exist
-     *
-     * @author Virchenko Maksim <muslim1992@gmail.com>
      *
      * @param mixed $job
      * @param array $data

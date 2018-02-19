@@ -11,7 +11,6 @@ use yiicod\jobqueue\jobs\MongoJob;
 /**
  * Class MongoThreadQueue
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
  * @package yiicod\jobqueue\queues
  */
 class MongoThreadQueue extends Queue implements QueueContract

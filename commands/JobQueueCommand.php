@@ -12,7 +12,6 @@ use yiicod\jobqueue\Worker;
 /**
  * Command to start worker
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class JobQueueCommand extends DaemonController

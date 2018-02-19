@@ -9,7 +9,6 @@ use yiicod\jobqueue\base\JobQueueInterface;
 /**
  * Handler for queue jobs
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 abstract class JobQueueAbstract implements JobQueueInterface

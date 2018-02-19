@@ -10,7 +10,7 @@ use Yii;
 /**
  * Class JobProcess
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
+ * @author Orlov Alexey <aaorlov88@gmail.com@gmail.com>
  *
  * @package SfCod\QueueBundle
  */

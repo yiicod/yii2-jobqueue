@@ -9,12 +9,6 @@ use yiicod\jobqueue\failed\MongoFailedJobProvider;
 use yiicod\jobqueue\handlers\ExceptionHandler;
 use yiicod\jobqueue\Worker;
 
-/**
- * Class WorkerCommand
- *
- * @author Orlov Alexey <aaorlov88@gmail.com>
- * @package yiicod\jobqueue\commands
- */
 class WorkerCommand extends Controller
 {
     use CommandTrait;

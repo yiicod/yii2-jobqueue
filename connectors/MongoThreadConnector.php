@@ -9,7 +9,6 @@ use yiicod\jobqueue\queues\MongoThreadQueue;
 /**
  * Connector for laravel queue to mongodb
  *
- * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class MongoThreadConnector implements ConnectorInterface
