@@ -23,7 +23,7 @@ use yiicod\jobqueue\queues\MongoThreadQueue;
 /**
  * Worker for laravel queues
  *
- * @author Orlov Alexey <aaorlov88@gmail.com@gmail.com>
+ * @author Orlov Alexey <aaorlov88@gmail.com>
  * @author Virchenko Maksim <muslim1992@gmail.com>
  */
 class Worker
