@@ -3,7 +3,7 @@
 namespace yiicod\jobqueue;
 
 use Illuminate\Queue\Capsule\Manager;
-use Yii;
+use Illuminate\Queue\Connectors\ConnectorInterface;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
 use yiicod\jobqueue\connectors\MongoThreadConnector;
@@ -28,7 +28,7 @@ class JobQueue extends Component implements BootstrapInterface
             'queue' => 'default',
             'expire' => 60,
             'limit' => 15, // Or 1
-            'connectionName' => 'thread',
+            'connection' => 'mongodb',
         ],
     ];
 
@@ -42,7 +42,7 @@ class JobQueue extends Component implements BootstrapInterface
     /**
      * Manager instance
      *
-     * @var
+     * @var Manager
      */
     private $manager = null;
 
@@ -63,11 +63,10 @@ class JobQueue extends Component implements BootstrapInterface
      */
     protected function connect()
     {
+        /* @var  Manager manager */
         $this->manager = new Manager();
 
-        $this->manager->addConnector('mongo-thread', function () {
-            return new MongoThreadConnector(Yii::$app->mongodb);
-        });
+        $this->addConnector('mongo-thread', new MongoThreadConnector());
 
         foreach ($this->connections as $name => $params) {
             $this->manager->addConnection($params, $name);
@@ -75,6 +74,19 @@ class JobQueue extends Component implements BootstrapInterface
 
         //Set as global to access
         $this->manager->setAsGlobal();
+    }
+
+    /**
+     * Add connector
+     *
+     * @param string $name
+     * @param Closure $resolver
+     */
+    public function addConnector(string $name, ConnectorInterface $connector)
+    {
+        $this->manager->addConnector($name, function () use ($connector) {
+            return $connector;
+        });
     }
 
     /**

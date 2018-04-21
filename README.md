@@ -8,20 +8,23 @@ Provides Illuminate queues implementation for Yii 2 using mongodb as main storag
 #### Base config:
 
 ```php
-'bootstrap' => [
-    'jobqueue'
-],
-'components' => [
-    'jobqueue' => [
-        'class' => 'yiicod\jobqueue\JobQueue'
+    'bootstrap' => [
+        'jobqueue'
+    ],
+    'components' => [
+        'jobqueue' => [
+            'class' => \yiicod\jobqueue\JobQueue::class
+        ]
     ]
-]
 ```
 #### Console config
 ```php
+    'bootstrap' => [
+        'jobqueue'
+    ],
     'controllerMap' => [
         'job-queue' => [
-            'class' => 'yiicod\jobqueue\commands\JobQueueCommand',
+            'class' => \yiicod\jobqueue\commands\JobQueueCommand::class,
         ]
     ],
 ```
@@ -40,7 +43,7 @@ $ php yii job-queue/stop
 ```php
     'controllerMap' => [
         'job-queue' => [
-            'class' => 'yiicod\jobqueue\commands\WorkerCommand',
+            'class' => \yiicod\jobqueue\commands\WorkerCommand::class,
         ]
     ],
 ```
@@ -91,13 +94,13 @@ Note: $data - additional data to your handler
 Add jobqueue component with connections parameters, specially with "MongoThreadQueue" driver and connection name ("default" in example)
 ```php
 'jobqueue' => [
-    'class' => 'yiicod\jobqueue\JobQueue',
+    'class' => \yiicod\jobqueue\JobQueue::class,
     'connections' => [
         'default' => [
             'driver' => 'mongo-thread',
             'table' => 'yii-jobs',
             'queue' => 'default',
-            'connectionName' => 'default',
+            'connection' => 'mongodb', // Default mongodb connection 
             'expire' => 60,
             'limit' => 1, // How many parallel process should run at the same time            
         ],

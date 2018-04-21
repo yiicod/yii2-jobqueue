@@ -47,6 +47,13 @@ class MongoThreadQueue extends Queue implements QueueContract
      */
     public function canRunJob(MongoJob $job)
     {
+        if ($job->getQueue()) {
+            return $this->getCollection()->count([
+                    'reserved' => 1,
+                    'queue' => $job->getQueue(),
+                ]) < $this->limit || $job->reserved();
+        }
+
         return $this->getCollection()->count(['reserved' => 1]) < $this->limit || $job->reserved();
     }
 

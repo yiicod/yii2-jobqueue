@@ -4,6 +4,7 @@ namespace yiicod\jobqueue\connectors;
 
 use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Queue\Connectors\ConnectorInterface;
+use Yii;
 use yiicod\jobqueue\queues\MongoThreadQueue;
 
 /**
@@ -13,21 +14,6 @@ use yiicod\jobqueue\queues\MongoThreadQueue;
  */
 class MongoThreadConnector implements ConnectorInterface
 {
-    /**
-     * Database connections.
-     */
-    protected $connection;
-
-    /**
-     * Create a new connector instance.
-     *
-     * @param $connection
-     */
-    public function __construct($connection)
-    {
-        $this->connection = $connection;
-    }
-
     /**
      * Establish a queue connection.
      *
@@ -39,9 +25,11 @@ class MongoThreadConnector implements ConnectorInterface
     {
         $config = array_merge([
             'limit' => 15,
-            'connectionName' => 'thread',
+            'connection' => 'mongodb',
         ], $config);
 
-        return new MongoThreadQueue($this->connection, $config['table'], $config['queue'], $config['expire'], $config['limit']);
+        $connection = Yii::$app->get($config['connection']);
+
+        return new MongoThreadQueue($connection, $config['table'], $config['queue'], $config['expire'], $config['limit']);
     }
 }
