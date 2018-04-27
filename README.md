@@ -14,7 +14,11 @@ Provides Illuminate queues implementation for Yii 2 using mongodb as main storag
     'components' => [
         'jobqueue' => [
             'class' => \yiicod\jobqueue\JobQueue::class
-        ]
+        ],
+        'mongodb' => [
+            'class' => '\yii\mongodb\Connection',
+            'dsn' => 'mongodb://@localhost:27017/mydatabase',
+        ],        
     ]
 ```
 #### Console config
@@ -27,6 +31,15 @@ Provides Illuminate queues implementation for Yii 2 using mongodb as main storag
             'class' => \yiicod\jobqueue\commands\JobQueueCommand::class,
         ]
     ],
+    'components' => [
+        'jobqueue' => [
+            'class' => \yiicod\jobqueue\JobQueue::class
+        ],
+        'mongodb' => [
+            'class' => '\yii\mongodb\Connection',
+            'dsn' => 'mongodb://@localhost:27017/mydatabase',
+        ],        
+    ]    
 ```
 ###### Start worker:
 
