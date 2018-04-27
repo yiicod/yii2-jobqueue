@@ -16,7 +16,7 @@ use yiicod\jobqueue\Worker;
  */
 class JobQueueCommand extends DaemonController
 {
-    use WorkerTrait;
+    use CommandTrait;
 
     /**
      * Get daemon name
