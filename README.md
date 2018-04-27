@@ -21,7 +21,7 @@ Provides Illuminate queues implementation for Yii 2 using mongodb as main storag
         ],        
     ]
 ```
-#### Console config
+#### Console config (simple fork)
 ```php
     'bootstrap' => [
         'jobqueue'
@@ -52,13 +52,25 @@ Stop worker daemon:
 ```php
 $ php yii job-queue/stop
 ```
-##### OR use pm2(http://pm2.keymetrics.io/). This variant more preferable.
+#### Console config + PM2(http://pm2.keymetrics.io/). This variant more preferable for console configuration.
 ```php
+    'bootstrap' => [
+        'jobqueue'
+    ],
     'controllerMap' => [
         'job-queue' => [
             'class' => \yiicod\jobqueue\commands\WorkerCommand::class,
         ]
     ],
+    'components' => [
+        'jobqueue' => [
+            'class' => \yiicod\jobqueue\JobQueue::class
+        ],
+        'mongodb' => [
+            'class' => '\yii\mongodb\Connection',
+            'dsn' => 'mongodb://@localhost:27017/mydatabase',
+        ],        
+    ]        
 ```
 ###### pm2 config:
 ```json
